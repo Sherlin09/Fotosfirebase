@@ -6,6 +6,15 @@ import { AppComponent } from './app.component';
 import { FotosComponent } from './components/fotos/fotos.component';
 import { CargaComponent } from './components/carga/carga.component';
 import { APP_ROUTES } from './app.routes';
+import { CargaImagenesService } from './services/carga-imagenes.service';
+
+// firebase
+import {  AngularFireModule } from 'angularfire2';
+import { environment } from '../environments/environment';
+import * as firebase from 'firebase';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
 
 @NgModule({
   declarations: [
@@ -16,9 +25,14 @@ import { APP_ROUTES } from './app.routes';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    APP_ROUTES
+    APP_ROUTES,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireAuthModule
   ],
-  providers: [],
+  providers: [
+    CargaImagenesService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
